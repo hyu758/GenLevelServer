@@ -4,7 +4,6 @@ const path = require('path');
 exports.getAllCategories = async (req, res) => {
   try {
     const result = await sql`SELECT c.id as "Id", c.name as "Name", c.placeholder as "Placeholder", c.background_color as "BackgroundColor", c.keys_background_color as "KeysBackgroundColor", c.keys_color as "KeysColor" FROM categories as c`;
-    console.log('Fetched categories:', result);
     res.status(200).json(result);
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -15,7 +14,6 @@ exports.getAllCategories = async (req, res) => {
 exports.createCategory = async (req, res) => {
   try {
     const {Id, Name, Placeholder, BackgroundColor, KeysBackgroundColor, KeysColor } = req.body;
-    console.log('Request body:', req.body);
     const result = await sql`
       INSERT INTO categories (id, name, placeholder, background_color, keys_background_color, keys_color)
       VALUES  (${Id}, ${Name}, ${Placeholder}, ${BackgroundColor}, ${KeysBackgroundColor}, ${KeysColor})

@@ -139,7 +139,6 @@ exports.getLevelsOrder = async (req, res) => {
     }
 };
 
-// Helper function to sort levels and update levelorder
 const updateLevelOrder = async () => {
     const sortedLevels = await sql`
         WITH word_weights AS (
