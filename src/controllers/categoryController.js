@@ -14,10 +14,11 @@ exports.getAllCategories = async (req, res) => {
 
 exports.createCategory = async (req, res) => {
   try {
-    const { id, name, placeholder, background_color, keys_background_color, keys_color } = req.body;
+    const {Id, Name, Placeholder, BackgroundColor, KeysBackgroundColor, KeysColor } = req.body;
+    console.log('Request body:', req.body);
     const result = await sql`
       INSERT INTO categories (id, name, placeholder, background_color, keys_background_color, keys_color)
-      VALUES (${id}, ${name}, ${placeholder}, ${background_color}, ${keys_background_color}, ${keys_color})
+      VALUES  (${Id}, ${Name}, ${Placeholder}, ${BackgroundColor}, ${KeysBackgroundColor}, ${KeysColor})
       RETURNING *;
     `;
     res.status(201).json(result[0]);
