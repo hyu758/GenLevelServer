@@ -49,10 +49,10 @@ exports.migrateCategoriesFromJson = async (req, res) => {
     const categories = JSON.parse(data);
 
     for (const category of categories) {
-      const { Id, Name, Placeholder, BackgroundColor, KeysBackgroundColor, KeysColor } = category;
+      const {Name, Placeholder, BackgroundColor, KeysBackgroundColor, KeysColor } = category;
       await sql`
-        INSERT INTO categories (id, name, placeholder, background_color, keys_background_color, keys_color)
-        VALUES (${Id}, ${Name}, ${Placeholder}, ${BackgroundColor}, ${KeysBackgroundColor}, ${KeysColor})
+        INSERT INTO categories (name, placeholder, background_color, keys_background_color, keys_color)
+        VALUES (${Name}, ${Placeholder}, ${BackgroundColor}, ${KeysBackgroundColor}, ${KeysColor})
         ON CONFLICT (id) DO NOTHING; -- Bỏ qua nếu id đã tồn tại
       `;
     }
